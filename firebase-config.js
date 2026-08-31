@@ -9,10 +9,10 @@
 // ============================================
 
 const firebaseConfig = {
-  apiKey: "REPLACE_WITH_YOUR_API_KEY",
-  authDomain: "REPLACE_WITH_YOUR_PROJECT.firebaseapp.com",
-  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
-  appId: "REPLACE_WITH_YOUR_APP_ID",
+  apiKey: "AIzaSyBT14tVEIN19pQfrSwSwJ6AH82aImN698c",
+  authDomain: "alyandmawywebsite.firebaseapp.com",
+  projectId: "alyandmawywebsite",
+  storageBucket: "alyandmawywebsite.firebasestorage.app",
+  messagingSenderId: "603281346412",
+  appId: "1:603281346412:web:0ff5dc0fe49a0eafc2ad49",
 };
