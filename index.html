@@ -88,10 +88,19 @@
   <p>Every post shows when it was shared.</p>
 </footer>
 
+<div id="iab-banner" class="iab-banner hidden">
+  <p>Heads up — the song may not play inside this app's built-in browser.</p>
+  <button type="button" id="iab-open-btn">Open in browser</button>
+</div>
+
 <div id="music-player" class="music-player-mount" aria-hidden="true"></div>
 <div id="music-widget" class="music-widget">
-  <button type="button" id="music-toggle" class="music-btn" aria-label="Play song"></button>
-  <button type="button" id="music-mute" class="music-btn" aria-label="Mute song"></button>
+  <div class="music-widget-row">
+    <button type="button" id="music-toggle" class="music-btn" aria-label="Play song"></button>
+    <button type="button" id="music-mute" class="music-btn" aria-label="Mute song"></button>
+    <span id="music-time" class="music-time">0:00 / 0:00</span>
+  </div>
+  <input type="range" id="music-seek" class="music-seek" min="0" max="1000" value="0" step="1" aria-label="Seek song">
 </div>
 
 <!-- Firebase (free tier) powers the shared board so everyone sees the same photos.
