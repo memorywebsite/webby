@@ -28,6 +28,7 @@
     widget: document.getElementById("music-widget"),
     seek: document.getElementById("music-seek"),
     time: document.getElementById("music-time"),
+    title: document.getElementById("music-title"),
   };
 
   const SEEK_MAX = 1000; // slider resolution (steps), independent of song length
@@ -80,8 +81,38 @@
     player.mute();
     player.playVideo();
     updateIcons();
+    loadSongTitle();
     startProgressLoop();
     startAutoplayWatchdog();
+  }
+
+  // Pull the real song title so it's never hardcoded / out of sync with
+  // VIDEO_ID. Try the player's own metadata first (instant, no network);
+  // fall back to YouTube's public oEmbed endpoint if that's not filled
+  // in yet (happens on some slower connections/in-app browsers).
+  function loadSongTitle() {
+    if (!els.title) return;
+    try {
+      const data = player.getVideoData && player.getVideoData();
+      if (data && data.title) {
+        els.title.textContent = data.title;
+        return;
+      }
+    } catch (e) {
+      /* ignore, fall through to oEmbed */
+    }
+    fetch(
+      "https://www.youtube.com/oembed?url=" +
+        encodeURIComponent("https://www.youtube.com/watch?v=" + VIDEO_ID) +
+        "&format=json"
+    )
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (json && json.title) els.title.textContent = json.title;
+      })
+      .catch(() => {
+        /* leave title blank rather than show an error */
+      });
   }
 
   function onPlayerError() {

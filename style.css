@@ -508,6 +508,19 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, label:focus-vis
   gap: 0.5rem;
 }
 
+.music-title {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-title:empty {
+  display: none;
+}
+
 .music-btn {
   flex: 0 0 auto;
   width: 36px;
