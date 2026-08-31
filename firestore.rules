@@ -1,0 +1,39 @@
+rules_version = '2';
+
+// Paste this into Firebase Console → Firestore Database → Rules.
+//
+// What this allows:
+//  - Anyone can READ posts (it's a public board).
+//  - Anyone signed in anonymously can CREATE a post, as long as
+//    it has the right shape and isn't oversized.
+//  - If a post isn't marked anonymous, it must include a name
+//    (up to 40 characters). Anonymous posts must have an empty name.
+//  - A post can only be DELETED by the same anonymous session
+//    that created it (matched by uid, never shown to viewers).
+//  - Nobody can EDIT a post after it's created.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /posts/{postId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.caption is string
+        && request.resource.data.caption.size() <= 280
+        && request.resource.data.image is string
+        && request.resource.data.image.size() < 1400000
+        && request.resource.data.anonymous is bool
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 40
+        && (request.resource.data.anonymous == true
+            ? request.resource.data.displayName.size() == 0
+            : request.resource.data.displayName.size() > 0);
+
+      allow delete: if request.auth != null
+        && resource.data.uid == request.auth.uid;
+
+      allow update: if false;
+    }
+  }
+}

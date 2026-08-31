@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Memories and Photos</title>
+<meta name="description" content="A shared board of photo memories — post as yourself or stay anonymous." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <path d="M20 34C20 34 8 27.5 8 17.5C8 12.2 12.2 8 17.3 8C19 8 20 9 20 9C20 9 21 8 22.7 8C27.8 8 32 12.2 32 17.5C32 27.5 20 34 20 34Z" fill="#B48CF0" opacity="0.92"/>
+      <path d="M20 34C16 24 16 14 12 6" stroke="#7FBF83" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M14 16C16 15 18 15.5 19 17" stroke="#7FBF83" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    </svg>
+    <h1 class="site-title">Memories<span class="amp">&amp;</span>Photos</h1>
+    <p class="site-tagline">A shared board of moments — post as yourself, or stay anonymous.</p>
+  </div>
+</header>
+
+<main class="board-wrap">
+  <div id="status-banner" class="status-banner" hidden></div>
+
+  <div id="board" class="board" aria-live="polite">
+    <!-- photo cards render here -->
+  </div>
+
+  <div id="empty-state" class="empty-state" hidden>
+    <p class="empty-headline">The board is empty.</p>
+    <p class="empty-sub">Be the first to add a memory.</p>
+  </div>
+
+  <div id="loading-state" class="loading-state">
+    <p>Loading memories…</p>
+  </div>
+</main>
+
+<button id="open-upload" class="fab" type="button" aria-haspopup="dialog" aria-controls="upload-dialog">
+  <span class="fab-plus" aria-hidden="true">+</span>
+  <span class="fab-label">Add a memory</span>
+</button>
+
+<div id="upload-backdrop" class="dialog-backdrop" hidden></div>
+<div id="upload-dialog" class="upload-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
+  <form id="upload-form">
+    <div class="dialog-head">
+      <h2 id="dialog-title">Add a memory</h2>
+      <button type="button" id="close-upload" class="dialog-close" aria-label="Close">&times;</button>
+    </div>
+
+    <label id="drop-zone" for="photo-input" class="drop-zone">
+      <img id="preview-img" alt="" hidden />
+      <span id="drop-zone-text" class="drop-zone-text">
+        <strong>Slide a photo in</strong>
+        <span>or tap to choose one from your device</span>
+      </span>
+    </label>
+    <input type="file" id="photo-input" accept="image/*" hidden />
+
+    <label for="caption-input" class="field-label">Caption</label>
+    <textarea id="caption-input" maxlength="280" rows="3" placeholder="What's happening in this one?"></textarea>
+    <div class="char-count"><span id="char-count">0</span>/280</div>
+
+    <div class="field-label">Post as</div>
+    <div class="mode-toggle" id="mode-toggle" role="radiogroup" aria-label="Post as">
+      <button type="button" class="mode-btn name-mode active" data-mode="name" role="radio" aria-checked="true">Me</button>
+      <button type="button" class="mode-btn anon-mode" data-mode="anon" role="radio" aria-checked="false">Anonymous</button>
+    </div>
+    <input type="text" id="name-input" class="name-input" maxlength="40" placeholder="your name or username" autocomplete="off">
+
+    <p id="form-error" class="form-error" hidden></p>
+
+    <button type="submit" id="submit-btn" class="submit-btn">
+      <span class="submit-label">Share to the board</span>
+    </button>
+  </form>
+</div>
+
+<footer class="site-footer">
+  <p>Every post shows when it was shared — with a name, or without one.</p>
+</footer>
+
+<!-- Firebase (free tier) powers the shared board so everyone sees the same photos.
+     See README.md for the two-minute setup. -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
