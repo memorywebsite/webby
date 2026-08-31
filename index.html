@@ -88,6 +88,12 @@
   <p>Every post shows when it was shared.</p>
 </footer>
 
+<div id="music-player" class="music-player-mount" aria-hidden="true"></div>
+<div id="music-widget" class="music-widget">
+  <button type="button" id="music-toggle" class="music-btn" aria-label="Play song"></button>
+  <button type="button" id="music-mute" class="music-btn" aria-label="Mute song"></button>
+</div>
+
 <!-- Firebase (free tier) powers the shared board so everyone sees the same photos.
      See README.md for the two-minute setup. -->
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
@@ -95,5 +101,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="app.js"></script>
+<script src="music.js"></script>
 </body>
 </html>
